@@ -2,12 +2,14 @@ import React from 'react'
 import Logo from "../img/blogstone1.png"
 import { Link } from "react-router-dom"
 
-const Navbar = () => {
+const Navbar = ({logout}) => {
   return (
     <div className="navbar">
         <div className="container">
             <div className="logo">
+                <Link className="link" to="/">
                 <img src={Logo} alt="" />
+                </Link>
             </div>
             <div className="links">
                 <Link className="link" to="/?cat=art">
@@ -29,7 +31,7 @@ const Navbar = () => {
                     <h6>FOOD</h6>
                 </Link>
                 <span>John "username"</span>
-                <span>Log Out</span>
+                <span onClick={logout}>Log Out</span>
                 <span className="write">
                     <Link className="link" to="/write">Write</Link>
                 </span>
