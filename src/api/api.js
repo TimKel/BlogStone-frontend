@@ -56,6 +56,13 @@ class BlogStoneApi {
         let res = await this.request(`users/${username}`);
         return res.user;
     }
+
+    //POSTS
+
+    static async getAllPosts(data){
+        let res = await this.request("posts/", data, "get");
+        return res.posts;
+    }
 }
 
 export default BlogStoneApi;
