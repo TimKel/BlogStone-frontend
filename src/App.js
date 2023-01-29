@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react';
-import { createBrowserRouter, RouterProvider, Route, Outlet  } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Route, Outlet, Redirect } from "react-router-dom";
 import Register from "./pages/Register"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
@@ -15,11 +15,13 @@ import useLocalStorage from './hooks/useLocalStorage';
 import UserContext from './common/UserContext';
 // import jwt from "jsonwebtoken";
 import { useJwt, decodeToken } from "react-jwt";
+import PrivateRoute from './common/PrivateRoutes';
 
 // Key name for storing token in localStorage for "remember me" re-login
 export const TOKEN_STORAGE_ID = "blogstone-token";
 
 const Layout = () => {
+  
   return (
     <>
       <Navbar/>
@@ -75,10 +77,12 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [infoLoaded, setInfoLoaded] = useState(false);
 
+  
+
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout logout={logout}/>,
+      element: <Layout />,
       children: [
         {
           path:"/",
@@ -96,7 +100,7 @@ function App() {
     },
     { 
       path: "/home",
-      element: <Home/>,
+      element: <Home />,
     },
     { 
       path: "/login",
@@ -108,11 +112,11 @@ function App() {
     },
     { 
       path: "/single",
-      element: <Single/>,
+      element: <Single />,
     },
     { 
       path: "/write",
-      element: <Write/>,
+      element: <Write />,
     },
   ]);
 
@@ -171,11 +175,13 @@ function App() {
       return { success: false, errors };
     }
   }
-
+ 
   /** Handles site-wide logout. */
   function logout() {
+    console.log("HELLO")
     setCurrentUser(null);
     setToken(null);
+   
     console.log("USER LOGGED OUT")
   }
 
@@ -183,7 +189,9 @@ function App() {
   return (
     <div className="app">
       <div className="container">
-        <RouterProvider router={router} />
+        <UserContext.Provider  value={{currentUser, setCurrentUser, logout }}>
+        <RouterProvider router={router}   />
+        </UserContext.Provider>
       </div>
     </div>
   );
