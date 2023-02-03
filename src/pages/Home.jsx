@@ -6,29 +6,40 @@ import axios from "axios";
 const Home = () => {
     const [posts, setPosts] = useState([]);
 
-    const location = useLocation();
-    console.log(location);
+    const cat = useLocation().search;
+    let cate = cat.split("=")
+    let cate1 = cate[1];
+    console.log("CATE", cate1);
 
     // useEffect(() => {
     //     const fetchData = async () => {
     //         try{
-    //             const res = await axios.get("/posts");
-    //             setPosts(res.data);
+    //             const res = await axios.get(`/posts${cat}`);
+    //             setPosts(posts);
     //         }catch (err) {
     //             console.log(err);
     //         }
     //     };
     //     fetchData();
-    // }, []);
+    // }, [cat]);
 
     useEffect(function getPostsOnMount() {
-        console.debug("CompanyList useEffect getCompaniesOnMount");
+        console.debug("All Posts List useEffect getPostsOnMount");
         search();
-    }, []);
+    }, [cat]);
 
     async function search(){
-        let posts = await BlogStoneApi.getAllPosts();
-        setPosts(posts);
+
+        if(!cat){
+            let posts = await BlogStoneApi.getAllPosts();
+            // console.log("IM ALL POSTS")
+            setPosts(posts)
+        }else{
+            let posts = await BlogStoneApi.getPostsByCat(cat);
+            console.log("POSTS", posts)
+            console.log("CAT", cate1);
+            setPosts(posts);
+        }
     }
     // const posts = [
     //     {
