@@ -61,7 +61,22 @@ class BlogStoneApi {
 
     static async getAllPosts(data){
         let res = await this.request("posts/", data, "get");
+        console.log("ALLRES", res)
         return res.posts;
+    }
+
+    static async getPostsByCat(cat, data){
+        let res = await this.request(`posts${cat}`, data, "get");
+        // let cat = data.split("=")
+        console.log("RES!!", res.postsByCat)
+        
+        return res.postsByCat;
+    }
+
+    static async getPost(id, data){
+        let res = await this.request(`posts/${id}`)
+        console.log(res.post);
+        return res.post
     }
 }
 
