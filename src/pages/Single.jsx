@@ -1,16 +1,24 @@
-import React, {useState, useEffect} from 'react'
-import { Link, useLocation } from "react-router-dom"
+import React, {useState, useEffect, useContext} from 'react'
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import Edit from "../img/pencil.png"
 import Delete from "../img/delete.png"
 import Menu from './Menu'
 import BlogStoneApi from '../api/api'
+import moment from "moment";
+import UserContext from '../common/UserContext'
+import Alert from '../common/Alert'
+
 
 const Single = () => {
     const [post, setPost] = useState({});
 
     const location = useLocation();
+    const navigate = useNavigate();
 
     const id = location.pathname.split("/")[2]
+
+    const { currentUser } = useContext(UserContext)
+    console.log("CURRENTUSER", currentUser);
 
     // let cate = cat.split("=")
     // let cate1 = cate[1];
@@ -49,30 +57,44 @@ const Single = () => {
         //     setPost(post);
         // }
     }
+
+    const handleDelete = async () => {
+        try{
+            const res = await BlogStoneApi.removePost(id)
+            Alert("Your Post has been deleted.")
+            navigate('/');
+        } catch(err){
+            console.log(err);
+        }
+    }
+    
   return (
     <div className="single">
         <div className="content">
             <img src={post.img}></img>
             <div className="user">
-                <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="user image" />
+                {post.userImg && (
+                    <img src={post.userImg} alt="user image" />
+                )}
                 <div className="info">
                     <span>{post.username}</span>
-                    <p>Posted 2 Days ago</p>
+                    <p>Posted {moment(post.date).fromNow()}</p>
                 </div>
-                <div className="edit">
+                {currentUser.username === post.username && (
+                    <div className="edit">
                     <Link to={`/write?edit=2`}>
                     <img src={Edit} alt="" />
                     </Link>
-                    <img src={Delete} alt="" />
-                </div>   
+                    <img onClick={handleDelete} src={Delete} alt="" />
+                    </div>
+                )}   
             </div>
             <h1>{post.title}</h1>
             <p>
                 {post.content}
             </p>
-        
         </div>
-        <Menu />
+        <Menu cat={post.cat} />
     </div>
   );
 };
