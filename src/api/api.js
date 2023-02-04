@@ -78,6 +78,13 @@ class BlogStoneApi {
         console.log(res.post);
         return res.post
     }
+
+    static async removePost(id, data){
+
+        let res = await this.request(`posts/${id}`, data, "delete")
+        console.log("DELETED")
+        
+    }
 }
 
 export default BlogStoneApi;
