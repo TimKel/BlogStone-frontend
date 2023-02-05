@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom';
 import BlogStoneApi from '../api/api';
+import axios from "axios";
 
 const Menu = ({cat}) => {
     const [posts, setPosts] = useState([]);
@@ -17,6 +18,7 @@ const Menu = ({cat}) => {
 
         try{
             let posts = await BlogStoneApi.getAllPosts();
+            
             
             console.log("POSTS", posts)
             
