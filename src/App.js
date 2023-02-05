@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react';
-import { createBrowserRouter, RouterProvider, Route, Outlet, Redirect } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Route, Outlet, Redirect, useNavigate } from "react-router-dom";
 import Register from "./pages/Register"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
@@ -77,6 +77,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [infoLoaded, setInfoLoaded] = useState(false);
 
+  // const navigate = useNavigate();
   
 
   const router = createBrowserRouter([
@@ -181,6 +182,7 @@ function App() {
     console.log("HELLO")
     setCurrentUser(null);
     setToken(null);
+    // navigate("/")
    
     console.log("USER LOGGED OUT")
   }
