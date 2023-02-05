@@ -19,7 +19,14 @@ const Single = () => {
 
     const { currentUser } = useContext(UserContext)
     console.log("CURRENTUSER", currentUser);
+    
 
+    // useEffect(function loggedOut(){
+    //     if(currentUser === null){
+    //         // currentUser.userna = {}
+    //         navigate("/login")
+    //     }
+    // }, [currentUser])
     // let cate = cat.split("=")
     // let cate1 = cate[1];
     // console.log("CATE", cate1);
