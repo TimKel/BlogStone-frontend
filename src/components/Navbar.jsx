@@ -1,11 +1,11 @@
 import React, {useContext} from 'react'
 import Logo from "../img/blogstone1.png"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import UserContext from '../common/UserContext'
 
 const Navbar = () => {
     const { currentUser, logout } = useContext(UserContext);
-
+    // const navigate = useNavigate();
 
   return (
     <div className="navbar">
