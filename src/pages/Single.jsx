@@ -86,15 +86,20 @@ const Single = () => {
                 <div className="info">
                     <span>{post.username}</span>
                     <p>Posted {moment(post.date).fromNow()}</p>
+                    <p>(TEst)Posted {post.post_date}</p>
                 </div>
-                {currentUser.username === post.username && (
+                
+                { currentUser && currentUser.username === post.username 
+                    ?
                     <div className="edit">
                     <Link to={`/write?edit=2`}>
                     <img src={Edit} alt="" />
                     </Link>
                     <img onClick={handleDelete} src={Delete} alt="" />
                     </div>
-                )}   
+                    : null
+                }  
+               
             </div>
             <h1>{post.title}</h1>
             <p>
