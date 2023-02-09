@@ -121,6 +121,7 @@ $lightGreen: #b9e7e7;
             align-items: center;
             justify-content: space-between;
             font-size: 12px;
+            
 
             img{
                 height: 100px;
@@ -325,6 +326,7 @@ $lightGreen: #b9e7e7;
                     height: 300px;
                     overflow: scroll;
                     border: 1px solid lightgray;
+                    text-align: left;
 
                     .editor{
                         height: 100%;
