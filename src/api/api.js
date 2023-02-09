@@ -85,6 +85,11 @@ class BlogStoneApi {
         console.log("DELETED")
         
     }
+
+    static async addPost(data){
+        let res = await this.request(`posts/`, data, "post")
+        return res.post
+    }
 }
 
 export default BlogStoneApi;
