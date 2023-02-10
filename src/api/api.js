@@ -90,6 +90,17 @@ class BlogStoneApi {
         let res = await this.request(`posts/`, data, "post")
         return res.post
     }
+
+    static async updatePost(id, data){
+        let res = await this.request(`posts/${id}/update`, data, "patch");
+        return res.post;
+    }
+
+    static async getUpdatePost(id, data){
+        let res = await this.request(`posts/${id}/update`)
+        console.log("API?API", res.post);
+        return res.post
+    }
 }
 
 export default BlogStoneApi;
