@@ -7,6 +7,7 @@ import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Single from "./pages/Single"
 import Write from "./pages/Write"
+import UpdatePost from "./pages/UpdatePost"
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import "./style.scss"
@@ -97,6 +98,10 @@ function App() {
           path:"/write",
           element:<Write/>
         },
+        {
+          path:"/post/:id/update",
+          element: <UpdatePost />
+        }
       ]
     },
     { 
@@ -119,6 +124,10 @@ function App() {
       path: "/write",
       element: <Write />,
     },
+    {
+      path:"/update",
+      element: <UpdatePost />
+    }
   ]);
 
   useEffect(function loadUserInfo() {
