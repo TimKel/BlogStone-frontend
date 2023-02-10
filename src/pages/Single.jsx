@@ -92,7 +92,7 @@ const Single = () => {
                 { currentUser && currentUser.username === post.username 
                     ?
                     <div className="edit">
-                    <Link to={`/write?edit=2`}>
+                    <Link to={`/post/${id}/update`}>
                     <img src={Edit} alt="" />
                     </Link>
                     <img onClick={handleDelete} src={Delete} alt="" />
