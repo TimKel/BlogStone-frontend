@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from "axios";
 import BlogStoneApi from '../api/api';
 import { useNavigate } from 'react-router-dom';
+import UserContext from '../common/UserContext';
 
 const Write = () => {
     const [value, setValue] = useState('');
@@ -11,6 +12,8 @@ const Write = () => {
     const [img, setImg] = useState(null);
     const [cat, setCat] = useState("null");
 
+    const { currentUser } = useContext(UserContext)
+    console.log("CU", currentUser)
     const navigate = useNavigate();
 
     // const upload = async () => {
@@ -28,12 +31,13 @@ const Write = () => {
     //     e.preventDefault()
     //     upload();
     // }
-
+    
     const [formData, setFormData] = useState({
         title: "",
-        content: value,
+        content: "",
         img: "",
-        cat: ""
+        cat: "",
+        user_id: currentUser.id
         
     })
     console.log(formData)
@@ -41,7 +45,7 @@ const Write = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let res = await BlogStoneApi.addPost(formData, value)
-        console.log("RESREACT", res)
+        console.log("RESREACT", res.data)
         if(res.success){
             navigate("/")
         }
