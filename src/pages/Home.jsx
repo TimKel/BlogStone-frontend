@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from "react-router-dom"
 import BlogStoneApi from '../api/api';
 import axios from "axios";
+import Alert from '../common/Alert.js'
 
 const Home = () => {
     const [posts, setPosts] = useState([]);
+    // const [postErrors, setPostErrors] = useState([]);
 
     const cat = useLocation().search;
     let cate = cat.split("=")
@@ -36,11 +38,16 @@ const Home = () => {
             setPosts(posts)
         }else{
             let posts = await BlogStoneApi.getPostsByCat(cat);
-            console.log("POSTS", posts)
+            console.log("POSTS", posts.length)
             console.log("CAT", cate1);
+            if(!posts.length){
+                console.log("NO POST TO SHOW")
+            }
             setPosts(posts);
         }
     }
+
+    // setPostErrors([]);
     // const posts = [
     //     {
     //     id: 1,
@@ -78,8 +85,11 @@ const Home = () => {
 
   return (
     <div className="home">
-        <div className="posts">
-            {posts.map(post=>(
+        {/* <div className="posts"> */}
+            
+            
+            
+                {/* {posts.map(post=> (
                 <div className="post" key={post.id}>
                     <div className="img">
                         <img src={post.img} alt="" />
@@ -93,10 +103,37 @@ const Home = () => {
                         
                     </div>
                 </div>
-            ))}
+            ))} */}
+            {posts.length
+                ? (
+                    <div className="posts">
+                        {posts.map(post => (
+                            <div className="post" key={post.id}>
+                                <div className="img">
+                                    <img src={post.img} alt="" />
+                                </div>
+                                <div className="content">
+                                    <Link className="link" to={`/post/${post.id}`}>
+                                    <h2>{post.title}</h2>
+                                    </Link>
+                                    <p>{post.content}</p>
+                                    <button>Read More</button>
+                                </div>
+                            </div>
+                    
+                        ))}
+                    </div>
+                    
+                ) : (
+                    <div>
+                    <p id="noCat">Sorry, no posts found under this category</p>
+                    <p id="noCat1">You know what to do! Write something great.</p>
+                    </div>
+                )}
+           
         </div>
 
-    </div>
+    // </div>
   )
 }
 
