@@ -80,13 +80,12 @@ const Single = () => {
         <div className="content">
             <img src={post.img}></img>
             <div className="user">
-                {post.userImg && (
-                    <img src={post.userImg} alt="user image" />
+                {post.profile_img && (
+                    <img src={post.profile_img} alt="user image" />
                 )}
                 <div className="info">
                     <span>{post.username}</span>
-                    <p>Posted {moment(post.date).fromNow()}</p>
-                    <p>(TEst)Posted {post.post_date}</p>
+                    <p>Posted {post.post_date}</p>
                 </div>
                 
                 { currentUser && currentUser.username === post.username 
