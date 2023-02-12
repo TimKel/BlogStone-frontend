@@ -14,6 +14,7 @@ import "./style.scss"
 import BlogStoneApi from './api/api';
 import useLocalStorage from './hooks/useLocalStorage';
 import UserContext from './common/UserContext';
+import LoadingSpinner from './common/LoadingSpinner';
 // import jwt from "jsonwebtoken";
 import { useJwt, decodeToken } from "react-jwt";
 import PrivateRoute from './common/PrivateRoutes';
@@ -100,7 +101,7 @@ function App() {
         },
         {
           path:"/post/:id/update",
-          element: <UpdatePost />
+          element: currentUser ? <UpdatePost /> : <Login path="/login" login={login}/>,
         }
       ]
     },
@@ -122,11 +123,11 @@ function App() {
     },
     { 
       path: "/write",
-      element: <Write />,
+      element: !currentUser || currentUser.id === null ? <Login path="/login" login={login} /> : <Write />,
     },
     {
-      path:"/update",
-      element: <UpdatePost />
+      path:"/post/:id/update",
+      element: !currentUser ? <Login path="/login" login={login} /> : <UpdatePost />
     }
   ]);
 
@@ -195,6 +196,9 @@ function App() {
    
     console.log("USER LOGGED OUT")
   }
+
+  if (!infoLoaded) return <LoadingSpinner />;
+
 
 
   return (
