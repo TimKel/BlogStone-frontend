@@ -68,8 +68,9 @@ const Single = () => {
     const handleDelete = async () => {
         try{
             const res = await BlogStoneApi.removePost(id)
-            Alert("Your Post has been deleted.")
+            // Alert("Your Post has been deleted.")
             navigate('/');
+            alert(`Your post "${post.title}" has been deleted.`)
         } catch(err){
             console.log(err);
         }
