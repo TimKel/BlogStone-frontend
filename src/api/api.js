@@ -92,8 +92,10 @@ class BlogStoneApi {
     }
 
     static async updatePost(id, data){
-        let res = await this.request(`posts/${id}/update`, data, "patch");
-        return res.post;
+        let res = await this.request(`posts/post/${id}/update`, data, "patch");
+        console.log("RESAPI", res.success)
+        console.log("RESAPIUPDIZZLE", res.success.updatePost)
+        return res.success;
     }
 
     static async getUpdatePost(id, data){
