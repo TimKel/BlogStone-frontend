@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import BlogStoneApi from '../api/api';
 import axios from "axios";
 
@@ -65,9 +65,15 @@ const Menu = ({cat}) => {
         <h1>Other posts you may like</h1>
         {posts.map(post=>(
             <div className="post" key={post.id}>
+                <Link className="link" to={`/post/${post.id}`}>
                 <img src={post.img} alt="" />
+                </Link>
+                <Link className="link" to={`/post/${post.id}`}>
                 <h2>{post.title}</h2>
+                </Link>
+                <Link className="link" to={`/post/${post.id}`}>
                 <button>Read More</button>
+                </Link>
             </div>
         ))}
     </div>
