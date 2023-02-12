@@ -77,9 +77,11 @@ const UpdatePost = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let res = await BlogStoneApi.updatePost(id, formData)
+        
         console.log("RESREACT", res)
-        if(res.success){
-            navigate("/")
+        if(res){
+            alert(`Post with title "${res.title}" updated successfully.`)
+            navigate(`/post/${res.id}`)
         }
     }
 
