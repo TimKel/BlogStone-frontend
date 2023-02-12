@@ -3,14 +3,16 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from "axios";
 import BlogStoneApi from '../api/api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import UserContext from '../common/UserContext';
+import { post } from 'superagent';
 
 const Write = () => {
     const [value, setValue] = useState('');
     const [title, setTitle] = useState('');
     const [img, setImg] = useState(null);
     const [cat, setCat] = useState("null");
+    const [post, setPost] = useState("");
 
     const { currentUser } = useContext(UserContext)
     console.log("CU", currentUser)
@@ -37,17 +39,22 @@ const Write = () => {
         content: "",
         img: "",
         cat: "",
-        user_id: currentUser.id
+        user_id: currentUser.id ? currentUser.id : ""
         
     })
     console.log(formData)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let res = await BlogStoneApi.addPost(formData, value)
-        console.log("RESREACT", res.data)
-        if(res.success){
-            navigate("/")
+        let res = await BlogStoneApi.addPost(formData)
+        console.log("RESREACT", res)
+        if(res){
+            // setPost(post)
+            // console.log("SETPOST", post)
+            // navigate(<Link to={`/posts/${post.id}`}></Link>)
+            alert(`Post with title "${res.title}" successfully created.`)
+            navigate(`/post/${res.id}`)
+            
         }
     }
 
@@ -58,12 +65,13 @@ const Write = () => {
     }
 
     
+    
   return (
     <div className="add">
         <div className="content">
-            <input type="text" placeholder="Title" name="title" onChange={handleChange} />
-            <input type="text" placeholder="Image URL" name="img" onChange={handleChange} />
-            <input className="editorContainer" type="text-area" name="content" onChange={handleChange} placeholder="Post content goes here..." />
+            <input type="text" placeholder="Title" name="title" onChange={handleChange} required />
+            <input type="text" placeholder="Image URL" name="img" onChange={handleChange} required />
+            <textarea className="editorContainer" type="text-area" name="content" onChange={handleChange} placeholder="Post content goes here..." required />
             {/* <div className="editorContainer">
                 <ReactQuill className="editor" theme="snow" name="content" value={value} onChange={setValue} />
             </div> */}
@@ -80,8 +88,10 @@ const Write = () => {
                 {/* <input style={{display:"none"}} type="file" id="file" onChange={e=>setImg(e.target.file[0])} />
                 <label className="file" htmlFor="file">Upload Image</label> */}
                 <div className="buttons">
-                    <button>Save as Draft</button>
+                    
+                    <Link to={`/posts/${post.id}`}>
                     <button onClick={handleSubmit} >Publish</button>
+                    </Link>
                 </div>
             </div>
             <div className="item">
