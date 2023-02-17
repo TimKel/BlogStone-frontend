@@ -7,7 +7,18 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import UserContext from '../common/UserContext';
 
 const UpdatePost = () => {
-    const [post, setPost] = useState({})
+    const [formData, setFormData] = useState({
+        title: "",
+        content: "",
+        img: "",
+        cat: "",
+        user_id: ""
+        
+    })
+    console.log("FORMDATA", formData)
+
+    // const [post, setPost] = useState({})
+
 
     const location = useLocation();
     console.log(location)
@@ -47,10 +58,13 @@ const UpdatePost = () => {
     }, []);
 
     async function search(){
-
-        let post = await BlogStoneApi.getPost(id)
-        console.log(post)
-        setPost(post)
+        console.log("TESTINGGGGG GET")
+        let post = await BlogStoneApi.getUpdatePost(id)
+        delete post.username 
+        delete post.profile_img 
+        console.log("UDPATEPOST",post)
+        // setPost(post)
+        setFormData(post)
 
         // if(!cat){
         //     let posts = await BlogStoneApi.getAllPosts();
@@ -64,15 +78,7 @@ const UpdatePost = () => {
         // }
     }
     
-    const [formData, setFormData] = useState({
-        title: "",
-        content: "",
-        img: "",
-        cat: "",
-        user_id: currentUser.id
-        
-    })
-    console.log(formData)
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -95,9 +101,9 @@ const UpdatePost = () => {
   return (
     <div className="add">
         <div className="content">
-            <input type="text" placeholder={post.title} name="title" onChange={handleChange} />
-            <input type="text" placeholder={post.img} name="img" onChange={handleChange} />
-            <textarea className="editorContainer" type="text-area" name="content" onChange={handleChange} placeholder={post.content} />
+            <input type="text" value={formData.title} name="title" onChange={handleChange} />
+            <input type="text" value={formData.img} name="img" onChange={handleChange} />
+            <textarea className="editorContainer" type="text-area" value={formData.content} name="content" onChange={handleChange}  />
             {/* <div className="editorContainer">
                 <ReactQuill className="editor" theme="snow" name="content" value={value} onChange={setValue} />
             </div> */}
@@ -114,34 +120,34 @@ const UpdatePost = () => {
                 {/* <input style={{display:"none"}} type="file" id="file" onChange={e=>setImg(e.target.file[0])} />
                 <label className="file" htmlFor="file">Upload Image</label> */}
                 <div className="buttons">
-                    <button>Save as Draft</button>
+                    
                     <button onClick={handleSubmit} >Publish</button>
                 </div>
             </div>
             <div className="item">
                 <h1>Category</h1>
                 <div className="cat">
-                    <input type="radio" checked={post.cat === "art"} name="cat" value="art" id="art" onChange={handleChange} />
+                    <input type="radio" checked={formData.cat === "art"} name="cat" value="art" id="art" onChange={handleChange} />
                     <label htmlFor="art">Art</label>
                 </div>
                 <div className="cat">
-                    <input type="radio" checked={post.cat === "science"} name="cat" value="science" id="science" onChange={handleChange} />
+                    <input type="radio" checked={formData.cat === "science"} name="cat" value="science" id="science" onChange={handleChange} />
                     <label htmlFor="science">Science</label>
                 </div>
                 <div className="cat">
-                    <input type="radio" checked={post.cat === "technology"} name="cat" value="technology" id="technology" onChange={handleChange} />
+                    <input type="radio" checked={formData.cat === "technology"} name="cat" value="technology" id="technology" onChange={handleChange} />
                     <label htmlFor="technology">Technology</label>
                 </div>
                 <div className="cat">
-                    <input type="radio" checked={post.cat === "cinema"} name="cat" value="cinema" id="cinema" onChange={handleChange} />
+                    <input type="radio" checked={formData.cat === "cinema"} name="cat" value="cinema" id="cinema" onChange={handleChange} />
                     <label htmlFor="cinema">Cinema</label>
                 </div>
                 <div className="cat">
-                    <input type="radio" checked={post.cat === "design"} name="cat" value="design" id="design" onChange={handleChange} />
+                    <input type="radio" checked={formData.cat === "design"} name="cat" value="design" id="design" onChange={handleChange} />
                     <label htmlFor="design">Design</label>
                 </div> 
                 <div className="cat">
-                    <input type="radio" checked={post.cat === "food"} name="cat" value="food" id="food" onChange={handleChange} />
+                    <input type="radio" checked={formData.cat === "food"} name="cat" value="food" id="food" onChange={handleChange} />
                     <label htmlFor="food">Food</label>
                 </div>
             </div>
