@@ -87,19 +87,22 @@ class BlogStoneApi {
     }
 
     static async addPost(data){
+        console.log("TESTING ADD POST")
         let res = await this.request(`posts/`, data, "post")
+        console.log("TEST ADDPOST DATA", res)
         return res.post
     }
 
     static async updatePost(id, data){
         let res = await this.request(`posts/post/${id}/update`, data, "patch");
         console.log("RESAPI", res.success)
-        console.log("RESAPIUPDIZZLE", res.success.updatePost)
+        console.log("RESAPIUPDATE", res.success.updatePost)
         return res.success;
     }
 
     static async getUpdatePost(id, data){
-        let res = await this.request(`posts/${id}/update`)
+        let res = await this.request(`posts/${id}`, data, "get")
+        delete res.username
         console.log("API?API", res.post);
         return res.post
     }
