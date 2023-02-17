@@ -21,11 +21,11 @@ body{
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: $lightGreen;
+            background-color: lightblue;
 
             h1{
                 font-size: 20px;
-                color: teal;
+                color: steelblue;
                 margin-bottom: 20px;
             }
 
@@ -46,7 +46,7 @@ body{
                 button{
                     padding: 10px;
                     border: none;
-                    background-color: teal;
+                    background-color: steelblue;
                     color: white;
                     cursor: pointer;
                 }
@@ -94,7 +94,7 @@ body{
                     }
 
                     .write{
-                        background-color: $lightGreen;
+                        background-color: lightblue;
                         width: 50px;
                         height: 50px;
                         border-radius: 50%;
@@ -105,9 +105,9 @@ body{
                         border:  1px solid #f2f2f2;
 
                         &:hover{
-                            color: teal;
+                            color: steelblue;
                             background-color: #f2f2f2;
-                            border: 1px solid teal;
+                            border: 1px solid steelblue;
                         }
                     }
                 }
@@ -118,7 +118,7 @@ body{
         footer{
             margin-top: 100px;
             padding: 20px;
-            background-color: $lightGreen;
+            background-color: lightblue;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -156,7 +156,7 @@ body{
                             content: "";
                             width: 100%;
                             height: 100%;
-                            background-color: $lightGreen;
+                            background-color: lightblue;
                             position: absolute;
                             top: 20px;
                             left: 20px;
@@ -190,12 +190,12 @@ body{
                             border: none;
                             cursor: pointer;
                             background-color: #f2f2f2;
-                            border: 1px solid teal;
-                            color: teal;
+                            border: 1px solid steelblue;
+                            color: steelblue;
 
                             &:hover{
                                 border: 1px solid #f2f2f2;
-                                background-color: $lightGreen;
+                                background-color: lightblue;
                                 color: black;
                             }
                         }
@@ -305,13 +305,13 @@ body{
                         padding: 7.5px 15px;
                         border: none;
                         cursor: pointer;
-                        color: teal;
+                        color: steelblue;
                         background-color: #f2f2f2;
-                        border: 1px solid teal;
+                        border: 1px solid steelblue;
 
                         &:hover{
                             border: 1px solid #f2f2f2;
-                            background-color: $lightGreen;
+                            background-color: lightblue;
                             color: black;
                         }
                     }
@@ -382,13 +382,13 @@ body{
                         :last-child{
                             cursor: pointer;
                             color: #f2f2f2;
-                            background-color: teal;
-                            border: 1px solid teal;
+                            background-color: steelblue;
+                            border: 1px solid steelblue;
                             padding: 3px 5px;
 
                             &:hover{
                                 
-                                background-color: rgb(0, 83, 83);
+                                background-color: steelblue;
                                 color: #f2f2f2;
                             }
                         }
@@ -398,11 +398,306 @@ body{
                         display: flex;
                         align-items: center;
                         gap: 2px;
-                        color: teal;
+                        color: steelblue;
                     }
                 }
 
             }
         }
     }
+}
+
+@media only screen and (max-width: 600px){
+
+    .app{
+        display: flex;
+        justify-content: center;
+    
+        .container{
+            width: 380px;
+
+            //NAVBAR
+            .navbar{
+                .container{
+                    padding: 10px 0px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    .logo{
+                        img{
+                        margin: 10px;
+                        display: block;
+                        width: 90px;
+                        border-radius: 50%;
+                        }
+                    }
+                    
+                    .links{
+                        display: flex;
+                        flex-direction:row;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        gap: 5px;
+
+                        h6{
+                            font-size: 10px;
+                            font-weight: 300;
+
+                        }
+
+                        span{
+                            cursor: pointer;
+                            
+                        }
+                        .link{
+                            font-size: 10px;
+
+                            
+                        }
+
+                        .write{
+                            background-color: lightblue;
+                            width: 30px;
+                            height: 30px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            
+                            justify-content: center;
+                            font-weight: 300;
+                            border:  1px solid #f2f2f2;
+
+                            &:hover{
+                                color: steelblue;
+                                background-color: #f2f2f2;
+                                border: 1px solid steelblue;
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            //HOMEPAGE
+        .home{
+
+            .posts{
+                margin-top: 50px;
+                display: flex;
+                flex-direction: column;
+                gap: 75px;
+
+                .post{
+                    display: block;
+                    flex-direction: row;
+                   
+                    gap: 100px;
+                    // align-items: center;
+
+                    .img{
+                        align-self: center;
+                        margin-left: 10%;
+                        
+
+                        &::after{
+                            content: "";
+                            width: 300px;
+                            height: 300px;
+                            background-color: lightblue;
+                            position: absolute;
+                            margin-right: 20px;
+                            top: 20px;
+                            
+                            z-index: -1;
+                        }
+
+                        img{
+                            width: 300px;
+                            height: 300px;
+                            object-fit: cover;
+                        }
+                    }
+
+                    .link{
+                        text-align: center;
+                        align-items: center;
+                        justify-content: center;
+                        margin-top: 5%;
+                    }
+
+                    
+
+                    .content{
+                        
+                        display: block;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        text-align: center;
+
+                        h1{
+                            font-size: 48px;
+                        }
+
+                        p{
+                            font-size: 18px;
+                        }
+
+                        button{
+                            width: max-content;
+                            padding: 10px 20px;
+                            border: none;
+                            cursor: pointer;
+                            background-color: #f2f2f2;
+                            border: 1px solid steelblue;
+                            color: steelblue;
+
+                            &:hover{
+                                border: 1px solid #f2f2f2;
+                                background-color: lightblue;
+                                color: black;
+                            }
+                        }
+                    }
+                }
+            }
+            #noCat{
+                
+                display: flex;
+                align-self: center;
+                justify-content: center;
+            }
+            #noCat1{
+                
+                display: flex;
+                align-self: center;
+                justify-content: center;
+            }
+        }
+
+        
+        //SINGLE
+        .single{
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+
+            .content{
+                flex: 5;
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+
+                img{
+                    width: 100%;
+                    height: 350px;
+                    object-fit: cover;
+                }
+
+                .user{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 14px;
+
+                    img{
+                        margin-left: 8px;
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+
+                    span{
+                        font-weight: bold;
+                    }
+                }
+
+                .edit{
+                    display: flex;
+                    margin: 15px;
+                    gap: 5px;
+
+                    img{
+                        width: 20px;
+                        height: 20px;
+                        cursor: pointer;
+                    }
+                }
+
+                h1{
+                    font-size: 42px;
+                    color: darkslategray;
+                    text-align: center;
+                    margin-top: -10px;
+                }
+
+                p{  
+                    margin-top: 5px;
+                    text-align: center;
+                    line-height: 30px;
+                }
+
+            }
+
+            .menu{
+                flex: 2;
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
+
+                h1{
+                    
+                    font-size: 20px;
+                    color: darkslategray;
+                    text-align: center;
+                }
+
+                .post{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    text-align: center;
+
+                    img{
+                        width: 100%;
+                        height: 200px;
+                        object-fit: cover;
+                    }
+
+                    h2{
+                        color: darkslategray;
+                    }
+
+                    button{
+                        width: max-content;
+                        padding: 7.5px 15px;
+                        border: none;
+                        cursor: pointer;
+                        color: steelblue;
+                        background-color: #f2f2f2;
+                        border: 1px solid steelblue;
+
+                        &:hover{
+                            border: 1px solid #f2f2f2;
+                            background-color: lightblue;
+                            color: black;
+                        }
+                    }
+                }
+            }
+        }
+
+        }   
+    }
+}
+
+@media (max-width: 768px){
+
+}
+
+@media (max-width: 992){
+
+}
+
+@media (max-width: 1200){
+
 }
