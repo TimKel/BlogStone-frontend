@@ -8,11 +8,21 @@ import UserContext from '../common/UserContext';
 import { post } from 'superagent';
 
 const Write = () => {
+    const [formData, setFormData] = useState({
+        title: "",
+        content: "",
+        img: "",
+        cat: "",
+        user_id: ""
+        
+    })
+
+
     const [value, setValue] = useState('');
     const [title, setTitle] = useState('');
     const [img, setImg] = useState(null);
     const [cat, setCat] = useState("null");
-    const [post, setPost] = useState("");
+    // const [post, setPost] = useState("");
 
     const { currentUser } = useContext(UserContext)
     console.log("CU", currentUser)
@@ -34,18 +44,20 @@ const Write = () => {
     //     upload();
     // }
     
-    const [formData, setFormData] = useState({
-        title: "",
-        content: "",
-        img: "",
-        cat: "",
-        user_id: currentUser.id ? currentUser.id : ""
-        
-    })
-    console.log(formData)
+    
+    
+    const handleChange = async (e) => {
+        const { name, value } = e.target;
+        console.log(e.target.value)
+        setFormData(data => ({...data, [name]: value}));
+    }
+    console.log("TEST OF FORMDATA", formData)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        formData.user_id = currentUser.id
+        console.log("FORMDIZZLEEE")
+        console.log("USER ID", formData.user_id)
         let res = await BlogStoneApi.addPost(formData)
         console.log("RESREACT", res)
         if(res){
@@ -58,20 +70,16 @@ const Write = () => {
         }
     }
 
-    const handleChange = async (e) => {
-        const { name, value } = e.target;
-        console.log(e.target.value)
-        setFormData(data => ({...data, [name]: value}));
-    }
+    
 
     
     
   return (
     <div className="add">
         <div className="content">
-            <input type="text" placeholder="Title" name="title" onChange={handleChange} required />
-            <input type="text" placeholder="Image URL" name="img" onChange={handleChange} required />
-            <textarea className="editorContainer" type="text-area" name="content" onChange={handleChange} placeholder="Post content goes here..." required />
+            <input type="text" placeholder="Title" value={formData.title} name="title" onChange={handleChange} required />
+            <input type="text" placeholder="Image URL, if left blank a random image is generated" value={formData.img} name="img" onChange={handleChange} required />
+            <textarea className="editorContainer" type="text-area" value={formData.content} name="content" onChange={handleChange} placeholder="Blog description goes here..." required />
             {/* <div className="editorContainer">
                 <ReactQuill className="editor" theme="snow" name="content" value={value} onChange={setValue} />
             </div> */}
