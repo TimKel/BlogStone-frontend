@@ -97,7 +97,7 @@ function App() {
         },
         {
           path:"/write",
-          element:<Write/>
+          element: !currentUser ? <Login path="/login" login={login} /> : <Write />
         },
         {
           path:"/post/:id/update",
@@ -123,7 +123,7 @@ function App() {
     },
     { 
       path: "/write",
-      element: !currentUser || currentUser.id === null ? <Login path="/login" login={login} /> : <Write />,
+      element: !currentUser ? <Login path="/login" login={login} /> : <Write />
     },
     {
       path:"/post/:id/update",
