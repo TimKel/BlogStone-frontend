@@ -60,6 +60,11 @@ const UpdatePost = () => {
     async function search(){
         console.log("TESTINGGGGG GET")
         let post = await BlogStoneApi.getUpdatePost(id)
+        if(currentUser.username != post.username){
+            
+            navigate("/")
+            alert("Only creator can update their own post.")
+        }
         delete post.username 
         delete post.profile_img 
         console.log("UDPATEPOST",post)
@@ -121,7 +126,7 @@ const UpdatePost = () => {
                 <label className="file" htmlFor="file">Upload Image</label> */}
                 <div className="buttons">
                     
-                    <button onClick={handleSubmit} >Publish</button>
+                    <button onClick={handleSubmit} >Update</button>
                 </div>
             </div>
             <div className="item">

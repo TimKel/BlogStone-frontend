@@ -228,7 +228,7 @@ body{
                 gap: 30px;
 
                 img{
-                    width: 100%;
+                    max-width: 700px;
                     height: 350px;
                     object-fit: cover;
                 }
@@ -255,21 +255,31 @@ body{
                     display: flex;
                     gap: 5px;
 
-                    img{
+                    .edit-button{
+                        background-color: lightblue;
+                    }
+                    .delete-button{
+                        background-color: lightcoral;
+                    }
+
+                    img {
                         width: 20px;
                         height: 20px;
                         cursor: pointer;
+                        
                     }
                 }
 
                 h1{
                     font-size: 42px;
                     color: darkslategray;
+                    max-width: 700px;
                 }
 
                 p{
                     text-align: justify;
                     line-height: 30px;
+                    max-width: 700px;
                 }
 
             }
