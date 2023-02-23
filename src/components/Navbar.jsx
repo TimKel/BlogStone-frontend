@@ -5,7 +5,6 @@ import UserContext from '../common/UserContext'
 
 const Navbar = () => {
     const { currentUser, logout } = useContext(UserContext);
-    // const navigate = useNavigate();
 
   return (
     <div className="navbar">
@@ -35,7 +34,7 @@ const Navbar = () => {
                     <h6>FOOD</h6>
                 </Link>
                 
-                <span class="link">{currentUser?.username}</span>
+                <span className="link">{currentUser?.username}</span>
                 {currentUser ? <span className="link" onClick={logout}>Log Out</span> : <Link className="link" to="/login">Login</Link>}
                 {currentUser ? <span className="write">
                                 <Link className="link" to="/write">Write</Link>

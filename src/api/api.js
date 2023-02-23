@@ -10,7 +10,6 @@ class BlogStoneApi {
     static token;
 
     static async request(endpoint, data = {}, method = "get"){
-        console.debug("API Call:", endpoint, data, method);
 
         const url = `${BASE_URL}/${endpoint}`;
         const headers = { Authorization: `Bearer ${BlogStoneApi.token}` };
@@ -59,51 +58,39 @@ class BlogStoneApi {
 
     //POSTS
 
+    //Get all posts
     static async getAllPosts(data){
         let res = await this.request("posts/", data, "get");
-        console.log("ALLRES", res)
         return res.posts;
     }
-
+    //Get all posts by single category
     static async getPostsByCat(cat, data){
         let res = await this.request(`posts${cat}`, data, "get");
-        // let cat = data.split("=")
-        console.log("RES!!", res.postsByCat)
-        
         return res.postsByCat;
     }
-
+    //Get a single post by id
     static async getPost(id, data){
         let res = await this.request(`posts/${id}`)
-        console.log(res.post);
         return res.post
     }
-
+    //Delete post permanently
     static async removePost(id, data){
-
         let res = await this.request(`posts/${id}`, data, "delete")
-        console.log("DELETED")
-        
     }
-
+    //Create a post
     static async addPost(data){
-        console.log("TESTING ADD POST")
         let res = await this.request(`posts/`, data, "post")
-        console.log("TEST ADDPOST DATA", res)
         return res.post
     }
-
+    //Update post
     static async updatePost(id, data){
         let res = await this.request(`posts/post/${id}/update`, data, "patch");
-        console.log("RESAPI", res.success)
-        console.log("RESAPIUPDATE", res.success.updatePost)
         return res.success;
     }
-
+    //Get a single post information to be updated. Remove username to be patched in DB
     static async getUpdatePost(id, data){
         let res = await this.request(`posts/${id}`, data, "get")
         delete res.username
-        console.log("API?API", res.post);
         return res.post
     }
 }

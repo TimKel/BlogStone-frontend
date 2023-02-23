@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import { useState, useEffect } from 'react';
 import { createBrowserRouter, RouterProvider, Route, Outlet, Redirect, useNavigate } from "react-router-dom";
@@ -15,9 +15,7 @@ import BlogStoneApi from './api/api';
 import useLocalStorage from './hooks/useLocalStorage';
 import UserContext from './common/UserContext';
 import LoadingSpinner from './common/LoadingSpinner';
-// import jwt from "jsonwebtoken";
 import { useJwt, decodeToken } from "react-jwt";
-import PrivateRoute from './common/PrivateRoutes';
 
 // Key name for storing token in localStorage for "remember me" re-login
 export const TOKEN_STORAGE_ID = "blogstone-token";
@@ -33,54 +31,11 @@ const Layout = () => {
   )
 }
 
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <Layout/>,
-//     children: [
-//       {
-//         path:"/",
-//         element:<Home/>
-//       },
-//       {
-//         path:"/post/:id",
-//         element:<Single/>
-//       },
-//       {
-//         path:"/write",
-//         element:<Write/>
-//       },
-//     ]
-//   },
-//   { 
-//     path: "/home",
-//     element: <Home/>,
-//   },
-//   { 
-//     path: "/login",
-//     element: <Login/>,
-//   },
-//   { 
-//     path: "/register",
-//     element: <Register signup={signup} />,
-//   },
-//   { 
-//     path: "/single",
-//     element: <Single/>,
-//   },
-//   { 
-//     path: "/write",
-//     element: <Write/>,
-//   },
-// ]);
 
 function App() {
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
   const [currentUser, setCurrentUser] = useState(null);
   const [infoLoaded, setInfoLoaded] = useState(false);
-
-  // const navigate = useNavigate();
-  
 
   const router = createBrowserRouter([
     {
@@ -132,18 +87,18 @@ function App() {
   ]);
 
   useEffect(function loadUserInfo() {
-    console.debug("App useEffect loadUserInfo", "token=", token);
+    // console.debug("App useEffect loadUserInfo", "token=", token);
 
     async function getCurrentUser(){
       if (token) {
         try{
           let { username } = decodeToken(token);
-          console.log("USERNAME", username)
+  
           // put the token on the API class so it can use it to call the API.
           BlogStoneApi.token = token;
-          console.log("TOKEN", token)
+    
           let currentUser = await BlogStoneApi.getCurrentUser(username);
-          console.log("CURRUSER", currentUser)
+
           setCurrentUser(currentUser);
           
         }catch (err) {
@@ -167,7 +122,6 @@ function App() {
       setToken(token);
       return { success: true };
     } catch (errors) {
-      console.error("Signup Failed", errors);
       return { success: false, errors };
     }
   }
@@ -182,19 +136,14 @@ function App() {
       setToken(token);
       return { success: true };
     } catch (errors) {
-      console.error("login failed", errors);
       return { success: false, errors };
     }
   }
  
   /** Handles site-wide logout. */
   function logout() {
-    console.log("HELLO")
     setCurrentUser(null);
     setToken(null);
-    // navigate("/")
-   
-    console.log("USER LOGGED OUT")
   }
 
   if (!infoLoaded) return <LoadingSpinner />;
