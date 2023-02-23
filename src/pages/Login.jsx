@@ -16,9 +16,8 @@ const Login = ({ login }) => {
    */
   async function handleSubmit(e){
     e.preventDefault();
-
     let result = await login(formData);
-    console.log(result)
+
     if (result.success){
       navigate("/");
     } else {
@@ -31,8 +30,6 @@ const Login = ({ login }) => {
     const { name, value } = e.target;
     setFormData(l => ({...l, [name]: value }));
   }
-  console.log(formData)
-  
 
   return (
     <div className="auth">

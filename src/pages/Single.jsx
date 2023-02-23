@@ -4,9 +4,7 @@ import Edit from "../img/pencil.png"
 import Delete from "../img/delete.png"
 import Menu from './Menu'
 import BlogStoneApi from '../api/api'
-import moment from "moment";
 import UserContext from '../common/UserContext'
-import Alert from '../common/Alert'
 
 
 const Single = () => {
@@ -18,30 +16,6 @@ const Single = () => {
     const id = location.pathname.split("/")[2]
 
     const { currentUser } = useContext(UserContext)
-    console.log("CURRENTUSER", currentUser);
-    
-
-    // useEffect(function loggedOut(){
-    //     if(currentUser === null){
-    //         // currentUser.userna = {}
-    //         navigate("/login")
-    //     }
-    // }, [currentUser])
-    // let cate = cat.split("=")
-    // let cate1 = cate[1];
-    // console.log("CATE", cate1);
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try{
-    //             const res = await axios.get(`/posts${cat}`);
-    //             setPosts(posts);
-    //         }catch (err) {
-    //             console.log(err);
-    //         }
-    //     };
-    //     fetchData();
-    // }, [cat]);
 
     useEffect(function getPostsOnMount() {
         console.debug("All Posts List useEffect getPostsOnMount");
@@ -49,26 +23,13 @@ const Single = () => {
     }, [id]);
 
     async function search(){
-
         let post = await BlogStoneApi.getPost(id)
         setPost(post)
-
-        // if(!cat){
-        //     let posts = await BlogStoneApi.getAllPosts();
-        //     // console.log("IM ALL POSTS")
-        //     setPost(post)
-        // }else{
-        //     let posts = await BlogStoneApi.getPostsByCat(cat);
-        //     console.log("POSTS", posts)
-        //     console.log("CAT", cate1);
-        //     setPost(post);
-        // }
     }
 
     const handleDelete = async () => {
         try{
             const res = await BlogStoneApi.removePost(id)
-            // Alert("Your Post has been deleted.")
             navigate('/');
             alert(`Your post "${post.title}" has been deleted.`)
         } catch(err){
@@ -93,9 +54,9 @@ const Single = () => {
                     ?
                     <div className="edit">
                     <Link to={`/post/${id}/update`}>
-                    <img src={Edit} alt="" />
+                    <img src={Edit} className="edit-button" alt="" />
                     </Link>
-                    <img onClick={handleDelete} src={Delete} alt="" />
+                    <img onClick={handleDelete} src={Delete} className="delete-button" alt="" />
                     </div>
                     : null
                 }  

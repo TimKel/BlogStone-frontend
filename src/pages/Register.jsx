@@ -1,8 +1,5 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import BlogStoneApi from '../api/api'
-import signup from "../App.js"
 import Alert from '../common/Alert'
 
 
@@ -19,23 +16,12 @@ const Register = ({signup}) => {
   const handleChange = e => {
     setInputs(prev => ({...prev, [e.target.name]: e.target.value}))
   }
-  console.log(inputs);
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try{
-  //   const res = await axios.post("http://localhost:3001/auth/register", inputs)
-  //   console.log(res)
-  //   } catch (err){
-  //     console.log(err)
-  //   }
-  // }
 
   async function handleSubmit(e) {
     e.preventDefault();
     
     let result = await signup(inputs);
-    console.log(result)
+
     if(result.success){
     navigate("/");
     } else {
