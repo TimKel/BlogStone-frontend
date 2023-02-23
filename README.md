@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+## Blogstone
+---
+Blogstone is a simple webapp for users to post their thoughts and experience regarding any subject they desire. There are a handful of categories to choose from, but you are not limited to these categories. Users can create an account and create their own blog, view others blogs as well as update or delete their own content.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Getting Started
+---
+Clone this repo to your machine.
 
-## Available Scripts
+Install all required dependencies with command: `npm install` or `npm i`
 
-In the project directory, you can run:
+Run the command `npm start` from the project directory. This command will open the application front-end in development mode under port `3000`.
 
-### `npm start`
+Open http://localhost:3000 to view application in your browser.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Description
+---
+Front-end will be displayed via `React.js`. Registration of users along with creating, updating or delete blogposts done via `async/await` methods that will communicate with the server routes on the back-end.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Front-end will store a user's auth token in `localStorage` for their browser so that this information can be sent to the back-end server routes to authenticate a user.
 
-### `npm test`
+## User Demographic
+--- 
+Blogstone is targeted toward anyone who finds writing as a creative or peaceful outlet. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Front end dependencies:
+---
+ Install with `npm i`
+    <li>`axios`: ^1.2.5
+    <li>`bootstrap`: ^5.2.3
+    <li>`cors`: ^2.8.5
+    <li>`react`: ^18.2.0
+    <li>`react-dom`: ^18.2.0
+    <li>`react-jwt`: ^1.1.8
+    <li>`react-router-dom`: ^6.7.0
+    <li>`react-scripts`: 5.0.1
+    <li>`sass`: ^1.57.1
+    
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Data
+--- 
+Profiles are anonymous. While users can use their own info for username/email a random profile avatar is generated using `Faker`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+If users choose to omit blog images, an image will be provided using `Picsum`'s external API for image generation.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+All posts are stored in a Postgresql Database, each post will have it's creators ID tied to it.
 
-### `npm run eject`
+## Tech Stack
+--- 
+- ### Front-end: 
+    - `React`
+    - `React Router`
+    - `Reactstrap`
+    - `Picsum` (image generator)
+- ### Back-end: 
+    - `Node`
+    - `Express`
+    - `Faker` (profile photo generator)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Database Schema
+--- 
+DB is `SQL` using `Postgres`. There are two tables, `Users` and `Posts`. User passwords are encrypted using `BCrypt`. Users will have a one-to-many relationship with `Posts` as they can add/delete as many as they want.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![DB-Schema](https://user-images.githubusercontent.com/91156228/220794690-06453fae-cb08-409e-9321-ba6dc82d5cce.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## User Flow
+--- 
+Blogstone is a Single Page Application using `React`. Users do not need to create an account to view blogs but will need to create an account to enable them to create their own blog and edit/delete them.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![User Flow](https://user-images.githubusercontent.com/91156228/220796658-d10b5cc3-4a82-4cc4-b4d7-f66f0172135f.png)
